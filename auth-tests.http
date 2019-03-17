@@ -1,0 +1,55 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+### Get token as player
+POST http://localhost:8080/oauth/token
+Authorization: Basic mobile_client_id mobile_client_secret
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+grant_type=password&client_id=mobile_client_id&client_secret=mobile_client_secret&username=player@example.com&password=pwd-player
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Get token as admin
+POST http://localhost:8080/oauth/token
+Authorization: Basic mobile_client_id mobile_client_secret
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+grant_type=password&client_id=mobile_client_id&client_secret=mobile_client_secret&username=admin@example.com&password=pwd-admin
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Get token as player via angular app
+POST http://localhost:8080/oauth/token
+Authorization: Basic angular_app_id angular_app_secret
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+grant_type=password&client_id=angular_app_id&client_secret=angular_app_secret&username=player@example.com&password=pwd-player
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Get token as admin via angular app
+POST http://localhost:8080/oauth/token
+Authorization: Basic angular_app_id angular_app_secret
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+grant_type=password&client_id=angular_app_id&client_secret=angular_app_secret&username=admin@example.com&password=pwd-admin
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+
+
+### Get user info
+GET http://localhost:8080/api/users/me
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+###
